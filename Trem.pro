@@ -20,3 +20,6 @@ HEADERS  += mainwindow.h \
     trem.h
 
 FORMS    += mainwindow.ui
+
+DISTFILES += \
+    README.md
