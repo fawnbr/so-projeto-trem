@@ -1,6 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <iostream>
+#include <pthread.h>
+
+const int num_intersections = 7;
+pthread_mutex_t intersections[num_intersections];
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -8,12 +13,15 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    for(int i=0;i<num_intersections;++i)
+        pthread_mutex_init(&intersections[i], NULL);
+
     //Cria o trem com seu (ID, posição X, posição Y)
-    trem1 = new Trem(1,310,0);
-    trem2 = new Trem(2,730,50);
-    trem3 = new Trem(3, 60, 180);
-    trem4 = new Trem(4, 460, 240);
-    trem5 = new Trem(5, 870, 180);
+    trem1 = new Trem(1,310,0, intersections);
+    trem2 = new Trem(2,730,50, intersections);
+    trem3 = new Trem(3, 60, 180, intersections);
+    trem4 = new Trem(4, 460, 240, intersections);
+    trem5 = new Trem(5, 870, 180, intersections);
 
     /*
      * Conecta o sinal UPDATEGUI à função UPDATEINTERFACE.
@@ -43,10 +51,10 @@ void MainWindow::updateInterface(int id, int x, int y){
     case 3: //Atualiza a posição do objeto da tela (quadrado) que representa o trem3
         ui->label_trem3->setGeometry(x,y,21,17);
         break;
-    case 4: //Atualiza a posição do objeto da tela (quadrado) que representa o trem3
+    case 4: //Atualiza a posição do objeto da tela (quadrado) que representa o trem4
         ui->label_trem4->setGeometry(x,y,21,17);
         break;
-    case 5: //Atualiza a posição do objeto da tela (quadrado) que representa o trem3
+    case 5: //Atualiza a posição do objeto da tela (quadrado) que representa o trem5
         ui->label_trem5->setGeometry(x,y,21,17);
         break;
     default:
@@ -57,6 +65,9 @@ void MainWindow::updateInterface(int id, int x, int y){
 MainWindow::~MainWindow()
 {
     delete ui;
+
+    for(int i=0;i<num_intersections;++i)
+        pthread_mutex_destroy(&intersections[i]);
 }
 
 /*
