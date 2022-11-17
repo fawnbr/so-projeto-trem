@@ -36,6 +36,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(trem4,SIGNAL(updateGUI(int,int,int)),SLOT(updateInterface(int,int,int)));
     connect(trem5,SIGNAL(updateGUI(int,int,int)),SLOT(updateInterface(int,int,int)));
 
+        trem1->start();
+        trem2->start();
+        trem3->start();
+        trem4->start();
+        trem5->start();
 
 }
 
@@ -70,33 +75,9 @@ MainWindow::~MainWindow()
         pthread_mutex_destroy(&intersections[i]);
 }
 
-/*
- * Ao clicar, trens começam execução
- */
-void MainWindow::on_pushButton_clicked()
-{
-    trem1->start();
-    trem2->start();
-    trem3->start();
-    trem4->start();
-    trem5->start();
-}
-
-/*
- * Ao clicar, trens param execução
- */
-void MainWindow::on_pushButton_2_clicked()
-{
-    trem1->terminate();
-    trem2->terminate();
-    trem3->terminate();
-    trem4->terminate();
-    trem5->terminate();
-}
 
 void MainWindow::on_T1Slider_sliderMoved(int position)
 {
-   std::cout << "Velocidade trem 1: " << position << std::endl;
     trem1->setVelocidade(position);
 }
 

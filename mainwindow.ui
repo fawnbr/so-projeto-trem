@@ -94,32 +94,6 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>380</y>
-      <width>99</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Ligar</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>490</x>
-      <y>380</y>
-      <width>98</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Parar</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_trilho4_2">
     <property name="geometry">
      <rect>
@@ -631,8 +605,6 @@
    <zorder>label_trilho3</zorder>
    <zorder>label_trilho4</zorder>
    <zorder>label_trem1</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>pushButton_2</zorder>
    <zorder>label_trilho2_2</zorder>
    <zorder>label_trem2</zorder>
    <zorder>label_trem3</zorder>
